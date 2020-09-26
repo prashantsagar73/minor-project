@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
-    <title>Document</title>
+    <title> {% block title %}
+{% endblock title %}</title>
 </head>
 <body>
   <!-- nav   -->
@@ -29,12 +30,9 @@
     </div>
   </header>
 
+{% block body %}
 
-
-
-
-
-  
+{% endblock body %}
 
   <!-- footer  -->
   <footer class="text-gray-700 body-font">
