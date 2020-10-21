@@ -2,6 +2,141 @@
 {% extends 'main.html' %}
 {% block title %} Clubpost {% endblock title %}   
 
+{% block style %}
+
+@import url(https://fonts.googleapis.com/css?family=Lato:400,300,700);
+
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+<!--body {-->
+<!--  background: #43423E;-->
+<!--}-->
+
+a {
+  text-decoration: none;
+  color: #5C7FB8
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.movie-card {
+  font: 14px/22px "Lato", Arial, sans-serif;
+  color: #A9A8A3;
+  padding: 10px;
+}
+
+.container {
+  margin: 0 auto;
+  width: 780px;
+  height: 540px;
+  background: #F0F0ED;
+  border-radius: 5px;
+  position: relative;
+}
+
+.hero {
+  height: 342px;
+  margin:0;
+  position: relative;
+  overflow: hidden;
+  z-index:1;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+
+}
+
+.hero:before {
+  content:'';
+  width:100%; height:100%;
+  position:absolute;
+  overflow: hidden;
+  top:0; left:0;
+  background:red;
+  background: url("https://calbaptist.edu/files/8414/6404/2506/Clubs_Banner.jpg");
+  z-index:-1;
+}
+
+.details {
+
+  padding: 190px 0 0 20px;
+}
+
+  .title1 {
+    color: white;
+    font-size: 44px;
+    margin-bottom: 13px;
+    position: relative;
+
+    span {
+      position: absolute;
+      top: 3px;
+      margin-left: 12px;
+      background: #C4AF3D;
+      border-radius: 5px;
+      color: #544C21;
+      font-size: 14px;
+      padding: 0px 4px;
+
+    }
+  }
+
+  .title2 {
+    color: #C7C1BA;
+    font-size: 23px;
+    font-weight: 300;
+    margin-bottom: 15px;
+  }
+
+
+.description {
+
+  bottom: 0px;
+  height: 200px;
+  font-size: 18px;
+  line-height: 26px;
+  color: #B1B0AC;
+padding: 20px
+
+}
+
+
+
+{% endblock style %}
+
 {% block body %}
-<p> hello from Clubpost </p>
+<div class="movie-card">
+
+  <div class="container">
+    <div class="hero">
+
+      <div class="details">
+
+        <div class="title1">Science Club</div>
+
+        <div class="title2">APP & Web Development</div>
+
+        <span class="likes">109 likes</span>
+
+      </div> <!-- end details -->
+
+    </div> <!-- end hero -->
+
+    <div class="description">
+        <div class="column2">
+
+        <p>Science Club is a successful approach to STEM education that integrates high quality, hands-on instruction with a deep commitment to serving our community. Relationships are at the core of our approach- between kids and mentors, teachers and scientists, the university and community organizations... <a href="#">read more</a></p>
+
+        </div> <!-- end avatars -->
+
+      </div> <!-- end column2 -->
+    </div> <!-- end description -->
+  </div> <!-- end container -->
+</div> <!-- end big -card -->
+
 {% endblock body %}

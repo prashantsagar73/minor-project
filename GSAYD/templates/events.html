@@ -1,180 +1,102 @@
 
 {% extends 'main.html' %}
-{% block title %} Eventpost {% endblock title %}   
+{% block title %} Events {% endblock title %}
 
-{% block body %}
-<style>
-body {
-<!--  background : beige ;-->
-  margin : 0 ;
-  padding : 0 ;
-  transition: all .3s;
-}
-::-webkit-scrollbar {
-  width: 5px;
-}
-::-webkit-scrollbar-thumb {
-  background:rgba(255, 99, 71, .3);
-  border-radius:2px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background:rgba(255, 99, 71, .9);
-  border-radius:2px;
-}
-.container {
+{% block style %}
+.eventcard{
   width: 80%;
-  margin: 0 auto;
-  display :flex;
-  justify-content:space-evenly;
-  flex-wrap:wrap;
+  margin: 2em;
 }
+.img-fill{
+        object-fit: cover;
+
+
+}
+.date{
+  width: 5em;
+  background-color: red;
+  text-align: center;
+  position: absolute;
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  color: #fff;
+      line-height: 1.5;
+    border-radius: .25rem;
+  border: 1px solid white;
+
+
+}
+.card-body{
+  width: 55%;
+  display: inline-block;
+  vertical-align: top;
+}
+.card-img{
+     width: 35%;
+    display: inline-block;
+    min-height: 100%;
+    height: 220px;
+  object-fit: cover;
+
+}
+
 
 .card{
-  margin : auto;
-  width: 350px;
-  overflow : hidden;
-  border-radius : 20px;
-  background : white;
-  margin-top:50px;
-  transition: all .2s;
-  box-shadow:5px 5px 15px rgba(0,0,0, .3);
+  display: block;
+}
+.card-text{
+  display: inline-block;
+
+}
+.tickets{
+  position: absolute;
+  right: 0px;
+  background-color: red;
+  border-color: red;
+  margin-right: 2em;
+ bottom: 0.5em;
+}
+.card-body{
+  padding-bottom: 0px;
 }
 
-.card:hover {
-  box-shadow:5px 5px 25px rgba(0,0,0, .5);
-  transform: translate(-5px, -5px);
-}
-
-.card:hover .icon svg{
-  animation : iconjln 1s;
-}
-
-.img-cover{
-  position: relative;
-}
-
-.card img{
-  width: 350px;
-  height:350px;
-  object-fit:cover;
-}
-
-.icon{
-  position:absolute;
-  top:0;
-  padding : 25px;
-  right:0;
-  border-bottom-left-radius:20px;
-  backdrop-filter: blur(20px);
-  background-color: rgba(255, 255, 255, 0.5);
-  cursor: pointer;
-}
-
-.desc{
-  padding : 1.5em ;
-  font-family: 'Poppins', sans-serif;
-}
-.desc h1{
-  display:inline;
-}
-.tdesc{
-  margin-bottom:40px;
-  width:100%;
-  height:50px;
-  overflow: auto;
-}
-
-.desc a{
-  text-decoration: none;
-  background-color: dodgerblue;
-  padding: 15px 25px;
-  color:white;
-  border-radius: 15px;
-  display:block;
-  text-align: center;
-  transition: all .2s;
-}
-.desc a:hover{
-  background-color: SteelBlue;
-}
-.desc a:hover svg{
-  animation : iconjln 1s;
-}
-
-@keyframes iconjln{
-  0%, 100% {
-    opacity : 1;
-    transform: translateX(0%);
+@media only screen and (max-width: 600px) {
+ .card-body{
+    width: 100%;
+    display: block;
+    vertical-align: top;
   }
-  50%{
-    opacity:0;
-    transform: translateX(100%);
-  }
-  70%{
-    opacity:0;
-    transform:translateX(-100%);
-  }
-}</style>
-<div class="container">
+  .card-img{
+   width: 100%;
+      display: block;
 
-  <div class="card">
-    <div class="img-cover"><img src="https://images.unsplash.com/photo-1475694867812-f82b8696d610?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"><div class="icon"><svg width="23" height="18" viewBox="0 0 23 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M0 9H22M12 1.5L20.9333 8.2C21.4667 8.6 21.4667 9.4 20.9333 9.8L12 16.5" stroke="black" stroke-width="3"/>
-</svg>
-</div></div>
+  }
+  .card-text{
+    display: block;
+  }
+  .text-muted{
+    padding-bottom: 3em;
+    display: block;
+  }
+}
+{% endblock style %}
 
-    <div class="desc">
-      <h1>HACKATHON</h1>
-      <p>mountain is the best place to chill out and rest cause it's has beautiful scenery and fresh air</p>
-      <a href ="">Bring me <svg width="19" height="14" viewBox="0 0 23 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M0 9H22M12 1.5L20.9333 8.2C21.4667 8.6 21.4667 9.4 20.9333 9.8L12 16.5" stroke="white" stroke-width="3"/>
-</svg></a>
-    </div>
+{% block body %}
+<div class="eventcard card mb-3">
+  <div class="date">
+    <h3>Mar<br>10</h3>
   </div>
 
-  <div class="card">
-    <div class="img-cover"><img src="https://images.unsplash.com/photo-1519852476561-ec618b0183ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"><div class="icon"><svg width="23" height="18" viewBox="0 0 23 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M0 9H22M12 1.5L20.9333 8.2C21.4667 8.6 21.4667 9.4 20.9333 9.8L12 16.5" stroke="black" stroke-width="3"/>
-</svg>
-</div></div>
-    <div class="desc">
-      <h1>Science Club</h1>
-      <p class="tdesc">River is the best place for chilling out too . and this place is ussualy used for summer camp and you can fishing while summer campRiver is the best place for chilling out too . and this place is ussualy used for summer camp and you can fishing while summer campRiver is the best place for chilling out too . and this place is ussualy used for summer camp and you can fishing while summer campRiver is the best place for chilling out too . and this place is ussualy used for summer camp and you can fishing while summer campRiver is the best place for chilling out too . and this place is ussualy used for summer camp and you can fishing while summer campRiver is the best place for chilling out too . and this place is ussualy used for summer camp and you can fishing while summer campRiver is the best place for chilling out too . and this place is ussualy used for summer camp and you can fishing while summer campRiver is the best place for chilling out too . and this place is ussualy used for summer camp and you can fishing while summer campRiver is the best place for chilling out too . and this place is ussualy used for summer camp and you can fishing while summer camp</p>
-      <a href ="">Bring me <svg width="19" height="14" viewBox="0 0 23 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M0 9H22M12 1.5L20.9333 8.2C21.4667 8.6 21.4667 9.4 20.9333 9.8L12 16.5" stroke="white" stroke-width="3"/>
-</svg></a>
-    </div>
+      <img class="card-img img-fill" src="https://media-cdn.tripadvisor.com/media/photo-s/12/ad/c2/2a/3450-winton-place-venue.jpg" alt="Card image cap">
+
+  <div class="card-body">
+    <h5 class="card-title">Event Name</h5>
+    <p class="card-text">This is a description of the even. The text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+    <p class="card-text"><small class="text-muted">Genre, Genre, Genre</small></p>
+    <a href="#" class="tickets btn btn-primary">Know more</a>
   </div>
-
-
-  <div class="card">
-    <div class="img-cover"><img src="https://images.unsplash.com/photo-1454391304352-2bf4678b1a7a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"><div class="icon"><svg width="23" height="18" viewBox="0 0 23 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M0 9H22M12 1.5L20.9333 8.2C21.4667 8.6 21.4667 9.4 20.9333 9.8L12 16.5" stroke="black" stroke-width="3"/>
-</svg>
-</div></div>
-
-   <div class="desc">
-      <h1>Beach</h1>
-      <p class="tdesc">River is the best place for chilling out too . and this place is ussualy used for summer camp and you can fishing while summer campRiver is the best place for chilling out too . and this place is ussualy used for summer camp and you can fishing while summer campRiver is the best place for chilling out too . and this place is ussualy used for summer camp and you can fishing while summer campRiver is the best place for chilling out too . and this place is ussualy used for summer camp and you can fishing while summer campRiver is the best place for chilling out too . and this place is ussualy used for summer camp and you can fishing while summer campRiver is the best place for chilling out too . and this place is ussualy used for summer camp and you can fishing while summer campRiver is the best place for chilling out too . and this place is ussualy used for summer camp and you can fishing while summer campRiver is the best place for chilling out too . and this place is ussualy used for summer camp and you can fishing while summer campRiver is the best place for chilling out too . and this place is ussualy used for summer camp and you can fishing while summer camp</p>
-      <a href ="">Bring me <svg width="19" height="14" viewBox="0 0 23 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M0 9H22M12 1.5L20.9333 8.2C21.4667 8.6 21.4667 9.4 20.9333 9.8L12 16.5" stroke="white" stroke-width="3"/>
-</svg></a>
-    </div>
-  </div>
-
-
-
 </div>
+
 {% endblock body %}
-{% block script%}
-const clickC = document.querySelector(".desc");
-
-clickC.addEventListener ("click", function (){
-  const r = Math.round(Math.random() * 255 + 0);
-  const g = Math.round(Math.random() * 255 + 0);
-  const b = Math.round(Math.random() * 255 + 0);
-
-  document.body.style.backgroundColor = 'rgb('+ r +','+ g +','+ b +')';
-});
-
-{% endblock script %}
