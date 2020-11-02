@@ -26,3 +26,7 @@ urlpatterns = [
     path('club/', include('club.urls')),
 
 ]
+# Django admin customization
+admin.site.site_header = "GSAYD Services"
+admin.site.site_title ="Welcome to GSAYD - Genuine Services At Your Desk"
+admin.site.index_title =" Welcome to this services by Prashant sagar"
