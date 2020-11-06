@@ -7,7 +7,8 @@ GYSAD (Genuine services at your Desk)
  
  2. Just download and run the main.py file.
 ---
-# GYSAD is a website where any college student find their study material(not official notes or study materials)related to your syllabus.
+# GYSAD is a website where any student find their study material related to your syllabus.
+# This website is completely open source.
 ---
 ## UPDATE PR'S ARE WELCOME BUT MUST BE A QUALITY PR'S OTHERWISE WILL BE MARKED AS INVALID!
 
