@@ -74,7 +74,7 @@ def handellogin(request):
 
         if user is not None:
             login(request, user)
-            messages.success(request, "Successfully Logged In")
+            messages.success(request, "Successfully Logged In as ")
             return redirect('home')
         else:
             messages.error(request, "Invalid Credentials please try again.")
