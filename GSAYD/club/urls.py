@@ -4,5 +4,6 @@ from django.urls import path,include
 from club import views
 urlpatterns = [
     path('', views.club, name='club'),
+    path('clubpost',views.clubpost, name ='clubpost')
 
 ]
