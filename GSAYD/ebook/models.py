@@ -10,5 +10,5 @@ class Pdf(models.Model):
     pdfile = models.ImageField(upload_to='media/pdfs',default="")
 
     def __str__(self):
-        return 'Message from ' + self
+        return 'Message from ' + self.title
     #  this is for describing name and email in admin section(

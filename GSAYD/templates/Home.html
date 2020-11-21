@@ -121,6 +121,8 @@ h1 {
 	<section class="showcase">
 			<div class="video-container">
 				<video src="https://traversymedia.com/downloads/video.mov" autoplay muted loop></video>
+					{% load static %}
+				<video src="{% static 'video.mov' %}" autoplay muted loop></video>
 			</div>
 			<div class="content">
 				<h1>Shoot For The Services</h1>
