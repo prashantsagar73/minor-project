@@ -1,8 +1,9 @@
 
 from django.contrib import admin
 from django.urls import path,include
-from events import views
+from . import views
 urlpatterns = [
-    path('', views.events, name='events'),
+    path("", views.index, name='events'),
+    path("blogpost/<int:id>", views.blogpost, name="BlogPost")
 
 ]

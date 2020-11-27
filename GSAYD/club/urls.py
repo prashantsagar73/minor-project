@@ -1,9 +1,8 @@
 
 from django.contrib import admin
 from django.urls import path,include
-from club import views
+from .import views
 urlpatterns = [
-    path('', views.club, name='club'),
-    path('clubpost',views.clubpost, name ='clubpost')
-
+    path('', views.index, name='index'),
+    path("clubpost/<int:id>", views.clubpost, name="clubpost")
 ]

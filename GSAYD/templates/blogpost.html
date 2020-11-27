@@ -1,14 +1,13 @@
 {% extends 'main.html' %}
-{% block title %} Clubpost {% endblock title %}
-{% block clubactive %} active {% endblock clubactive %}
-
-{% block body %}
+{% block title %} Blogpost {% endblock title %}
+{% block eventsactive %} active {% endblock eventsactive %}
+{% block body%}
 <div class="container">
     <main role="main" class="container">
         <div class="row my-4">
             <div class="col-md-8 blog-main">
                 <h3 class="font-italic">
-                    {{post.title}}
+                    {{post.event_name}}
                 </h3>
 
 
@@ -19,9 +18,10 @@
                     </p>
 
                     <p>{{post.chead0}}</p>
-                    <h2>{{post.}}</h2>
+                    <h2>{{post.head1}}</h2>
                     <p>{{post.chead1}}</p>
                     <h3>{{post.content}}</h3>
+                    <p>{{post.chead2}}</p>
                     <div class="fb-comments" data-href="http://127.0.0.1:8000/blog/blogpost/{{post.post_id}}" data-numposts="5" data-width=""></div>
 
                 </div>

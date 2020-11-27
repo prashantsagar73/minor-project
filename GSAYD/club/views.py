@@ -1,14 +1,16 @@
-from django.shortcuts import render, HttpResponse, redirect
-from club.models import Club
+from django.shortcuts import render
+from django.http import HttpResponse
+from .models import Club
 
 
 # Create your views here.
-def club(request):
-    allPosts = Club.objects.all()
-    # print(allPosts)
-    context = { 'allPosts' : allPosts}
-    return render(request,'club.html', context)
+def index(request):
+    # return HttpResponse("This is events page")
+    myposts = Club.objects.all()
+    print(myposts)
+    return render(request, 'club.html', {'myposts': myposts})
 
-
-def clubpost(request):
-    return  render(request,'clubpost.html')
+def clubpost (request, id):
+    post = Club.objects.filter(post_id=id) [0]
+    # print(post)
+    return render(request, 'clubpost.html', {'post': post})

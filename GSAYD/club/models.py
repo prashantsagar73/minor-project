@@ -1,8 +1,9 @@
 from django.db import models
+from django.utils.timezone import now
 
 # Create your models here.
 class Club(models.Model):
-    sno = models.AutoField(primary_key=True)
+    post_id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=210)
     author = models.CharField(max_length=100)
     content = models.TextField()

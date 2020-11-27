@@ -1,113 +1,33 @@
-
 {% extends 'main.html' %}
 {% block title %} Clubpost {% endblock title %}
 {% block clubactive %} active {% endblock clubactive %}
-
-<!--{% block style %}-->
-<!--body{-->
-<!-- background-image: linear-gradient(120deg, #FBEFF5);-->
-<!--}-->
-<!--  header{-->
-<!--  text-align: center;-->
-<!--  font-size: 40px;-->
-<!--  font-weight: bold;-->
-<!--}-->
-<!--h3{-->
-<!--  font-size: 20px;-->
-<!--}-->
-<!--p{-->
-<!--  font-size: 12px;-->
-<!--}-->
-<!--.col {-->
-<!--  width: 25%;-->
-<!--  padding: 0 10px;-->
-<!--}-->
-<!--.row {-->
-<!--  margin: 30px 45px;-->
-<!--  margin-top: 50px;-->
-<!--}-->
-
-<!--@media screen and (max-width: 600px) {-->
-<!--  .column {-->
-<!--    width: 100%;-->
-<!--    display: block;-->
-<!--    margin-bottom: 20px;-->
-<!--  }-->
-<!--}-->
-<!--.card {-->
-<!--  box-shadow: 5px 10px #848843;-->
-<!--  padding: 16px;-->
-<!--  text-align: center;-->
-<!--  background-image: linear-gradient(200deg,cyan, coral);-->
-<!--  display: flex;-->
-<!--  border-radius: 5px;-->
-
-<!--}-->
-
-<!--.card1{-->
-<!--  border-top-color: coral;-->
-<!--  transform: translate(-10px, 20px);-->
-<!--}-->
-<!--.card2{-->
-<!--  border-top-color: green;-->
-<!--  transform: translate(-1px, -15px);-->
-<!--}-->
-<!--.card3{-->
-<!--  border-top-color: #839829;-->
-<!--  transform: translate(-10px,  40px);-->
-<!--}-->
-<!--.card4{-->
-<!--  border-top-color: lime;-->
-<!--  transform: translate(-1px, 10px);-->
-<!--}-->
-<!--img{-->
-<!--  width:70px;-->
-<!--  height:60px;-->
-<!--  float:right;-->
-<!--  margin-top: -10px;-->
-<!--}-->
-<!--{% endblock style %}-->
-
 {% block body %}
 <div class="container">
-{% for post in allPosts %}
-
-    <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-        <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-success">{{post.author}}</strong>
-          <h3 class="mb-0">{{post.title}}</h3>
-          <div class="mb-1 text-muted">{{post.datetime}}</div>
-          <p class="mb-auto">{{post.content | truncatechars:100 }}</p>
-          <a href="/club/{post.slug}" class="stretched-link">Continue reading</a>
-                      <strong class="d-inline-block mb-2 text-danger">{{post.timestamp}}</strong>
-
-        </div>
-        <div class="col-auto d-none d-lg-block">
-            <img src='/media/images/club/{{post.image}}' class="bd-placeholder-img" width="200" height="250" aria-label="Placeholder: Thumbnail">
+    <div class="row my-4">
+        {% for items in myposts %}
+        <div class="col-md-12">
+            <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                    <strong class="d-inline-block mb-2 text-primary">{{items.title}}</strong>
+                    <h3 class="mb-0">{{items.title}}</h3>
+                    <div class="mb-1 text-muted">{{items.timestamp}}</div>
+                    <p class="card-text mb-auto">{{items.content |truncatechars:100 }}</p>
+                    <a href="clubpost/{{items.post_id}}" class="stretched-link">Continue reading</a>
+                </div>
+                <div class="col-auto d-none d-lg-block">
+                    <img src='/media/{{items.thumbnail}}' class="bd-placeholder-img" width="200" height="250" aria-label="Placeholder: Thumbnail">
                     <rect width="100%" height="100%" fill="#55595c"></rect>
                     </img>
+                </div>
+            </div>
         </div>
-      </div>
-   {% endfor %}
-  </div>
+        {% if forloop.counter|divisibleby:2 %}
+    </div>
+    <div class="row my-2">
 
-</div>
 
+        {% endif %} {% endfor %}
+    </div>
 
 
 {% endblock body %}
-
-
-
-<!--  <div class="row row-cols-1 row-cols-md-2">-->
-<!--  <div class="col mb-4">-->
-<!--    <div class="card card1">-->
-<!--      <div class="card-body">-->
-<!--        <img src="https://p6cdn4static.sharpschool.com/UserFiles/Servers/Server_2554528/Image/science_club_thm.png" />-->
-<!--        <h5 class="card-title"><b>hello</b></h5>-->
-<!--        <p class="card-text">Science Club: Staffing, Employment Companies and Careers for Scientists ... Science is how we discover how our world works. It is how we create new technologies and we are motivated to understand things and make our lives better. When you think of marketing you probably don't think of science, but there is a lot of science in marketing..</p>-->
-<!--        <a href="/club/clubpost" role="button" class="btn btn-primary">Read more</a>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    -->
-
