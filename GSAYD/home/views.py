@@ -85,4 +85,7 @@ def handellogin(request):
 def handellogout(request):
     logout(request)
     messages.success(request, "Successfully Logged Out")
-    return redirect('home')    
+    return redirect('home')
+
+def fileuploader(request):
+    return render(request,'fileuploader.html')

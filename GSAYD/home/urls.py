@@ -7,6 +7,7 @@ urlpatterns = [
     path('contact/',views.contact, name='contact'),
     path('signup', views.handelsignup, name='handelsignup'),  
     path('login', views.handellogin, name='handellogin'),  
-    path('logout', views.handellogout, name='handellogout')  
+    path('logout', views.handellogout, name='handellogout'),
+    path('fileuploader', views.fileuploader, name='fileuploader')
 
 ]

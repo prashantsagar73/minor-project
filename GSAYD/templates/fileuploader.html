@@ -1,0 +1,296 @@
+{% extends 'main.html' %}
+{% block title %} fileUploader {% endblock title %}
+{% block fileuploaderactive %} active {% endblock fileuploaderactive  %}
+
+
+{% block style %}
+
+.uploadContainer {
+  position: relative;
+}
+
+.uploadDropzone {
+  border:1px dashed #aaa;
+  padding:40px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.uploadDropzone .cloud {
+  font-size: 48px;
+  line-height: 1;
+  opacity: .5;
+}
+
+.uploadMessage {
+  margin-top:.5rem;
+}
+
+.uploadProgress {
+  margin-top:.5rem;
+  background-color: #fff;
+  border: .75px solid #aaa;
+  border-radius: 3px;
+}
+
+.uploadProgress:empty {
+  background: none; margin:0; border:0;
+}
+
+.uploadProgress .wrapper {
+  position: relative;
+  background-color: #fff;
+  white-space: nowrap;
+  border-bottom: .75px solid #d2d2d2;
+  line-height: 35px;
+  padding: 0 0 0 10px;
+}
+
+.uploadProgress .wrapper:last-child {
+  border-bottom: 0;
+}
+
+.uploadProgress .wrapper:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.uploadProgress .name {
+  display: block;
+  float: left;
+  white-space: nowrap;
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.uploadProgress .size {
+  display: block;
+  float: left;
+  white-space: nowrap;
+  color: #aaa;
+  padding-left: 5px;
+}
+
+.uploadProgress .size:before {
+  content: "(";
+}
+
+.uploadProgress .size:after {
+  content: ")";
+}
+
+.uploadProgress .progress {
+  display: block;
+  float: right;
+  width: 180px;
+  margin: 5px 10px;
+}
+
+.uploadProgress .deleteAttachment {
+  display: block;
+  float: right;
+  padding: 0;
+  background-color: transparent !important;
+  border: 0 !important;
+  background-image: none;
+  line-height:inherit;
+}
+
+.deleteAttachment:after {
+  content: '\00D7';
+  display: block;
+  line-height: inherit;
+  width: 35px;
+  text-align: center;
+  color: rgba(0, 0, 0, .3);
+  font-family: sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.uploadProgress .wrapper.success {
+  color:green;
+}
+.uploadProgress .wrapper.error {
+  color:red;
+}
+
+.uploadProgress .error .progress { display:none; }
+.uploadProgress .success .progress { display:none; }
+{% endblock style %}
+
+
+
+{% block body %}
+<div style="width:600px; margin:20px auto;">
+
+
+		    <div class="uploadContainer">
+
+                <div class="uploadDropzone">
+
+                    <i class="material-icons cloud">file _upload</i>
+                    <h5>Drag files here to upload</h5>
+                    <p class="text-muted">or <button type="button" class="link btnUpload"><b>browse</b></button> to choose files.</p>
+
+                </div>
+
+                <div class="alert uploadMessage" style="display:none;"></div>
+                <div id="progressContainer" class="uploadProgress"></div>
+
+
+            </div>
+
+  <br> <small>Only .pdf will accepted  <a href="#" target="_blank">Uploader</a>. <a href="#" target="_blank"></a>.
+
+</div>
+{% endblock body %}
+
+{% block script %}
+
+var uploader;
+
+function createUploader ( i, elem ) {
+
+    var elem = $(elem);
+    var type = elem.data("type");
+    var dropzone = elem.find('.uploadDropzone');
+    var btn = elem.find('.btnUpload');
+    var progBox = elem.find('.uploadProgress');
+    var msgBox = elem.find('.uploadMessage');
+    var maxsize = 10000;
+
+    function showUploadMessage ( msg, result ) {
+        msgBox.text( msg ).addClass( result ).show();
+    }
+
+
+    function hideUploadMessage () {
+        msgBox.text('').removeClass('error').removeClass('unknown').removeClass('success').hide();
+    }
+
+
+    //create uploader(s)
+
+    uploader = new ss.SimpleUpload({
+        button: btn,
+        dropzone: dropzone,
+        url: 'your_php_file.php',
+        name: 'uploadfile',
+        multipart: true,
+        disabledClass: 'disabled',
+        responseType: 'json',
+        allowedExtensions: ["gif", "jpg", "jpeg", "png", "pdf", "ppt"],
+        maxSize: maxsize,
+        multiple: true,
+        multipleSelect: true,
+   	    maxUploads: 10,
+	    queue: false,
+        startXHR: function() {
+
+        },
+        onSubmit: function(filename) {
+
+            hideUploadMessage();  //hide any previous errors
+
+            var progress = document.createElement('div'),
+              bar = document.createElement('div'),
+              fileSize = document.createElement('div'),
+              wrapper = document.createElement('div'),
+              close = document.createElement('button'),
+              progressBox = document.getElementById('progressContainer');
+
+
+          // Assign each element its corresponding class
+          progress.className = 'progress';
+          bar.className = 'progress-bar';
+          fileSize.className = 'size';
+          wrapper.className = 'wrapper';
+          close.className = 'deleteAttachment';
+
+
+          // Assemble the progress bar and add it to the page
+          progress.appendChild(bar);
+          wrapper.innerHTML = '<div class="name">'+filename+'</div>';
+          wrapper.appendChild(fileSize);
+          wrapper.appendChild(close);
+          wrapper.appendChild(progress);
+
+
+          $(wrapper).data('file',filename);
+
+          progressBox.appendChild(wrapper);
+
+          this.setAbortBtn ( close );
+          this.setProgressBar(bar);
+          this.setFileSizeBox(fileSize);
+          //this.setProgressContainer(wrapper); // designate the containing div to be removed after upload
+
+        },
+
+        onSizeError: function() {
+            var msg = 'Files may not exceed ' + maxsize + 'k.';
+            showUploadMessage ( msg, 'error' );
+        },
+
+        onExtError: function() {
+            var msg = 'Please select a GIF, JPG, PDF, PNG or PPT.';
+        },
+
+        onComplete: function( filename, response ) {
+
+            $('.wrapper').filterByData('file',filename).addClass('success'); //add a 'completed' class to the wrapper when file succeeds.
+
+            if ( !response ) {
+                var msg = 'Unable to upload file(s).';
+                showUploadMessage ( msg, 'error' );
+                return;
+            }
+
+            if ( response.success === true ) {
+
+                //things to do after complete, such as show image;
+
+            } else {
+
+                if ( response.msg )  {
+                    var msg = escapeTags( response.msg );
+                    showUploadMessage ( msg, 'error' );
+                } else {
+                    var msg = 'Sorry! Unable to upload one of your files.';
+                    showUploadMessage ( msg, 'error' );
+                }
+
+            }
+
+        },
+        onError: function() {
+
+            var msg = 'Unable to upload file(s) to server.  Please try again later.';
+            showUploadMessage ( msg, 'error' );
+            $('.wrapper').removeClass('success').addClass('error');
+
+        }
+
+    });
+
+
+
+}
+
+
+$('.uploadContainer').each(createUploader);
+
+
+
+$(document).on( 'click', '.deleteAttachment', function(e) {
+
+	e.preventDefault();
+	var wrapper = $(this).closest('.wrapper');
+	wrapper.remove();
+
+
+});
+{% endblock script %}
