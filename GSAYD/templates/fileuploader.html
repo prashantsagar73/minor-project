@@ -5,292 +5,326 @@
 
 {% block style %}
 
-.uploadContainer {
-  position: relative;
-}
-
-.uploadDropzone {
-  border:1px dashed #aaa;
-  padding:40px;
-  text-align: center;
-  border-radius: 5px;
-}
-
-.uploadDropzone .cloud {
-  font-size: 48px;
-  line-height: 1;
-  opacity: .5;
-}
-
-.uploadMessage {
-  margin-top:.5rem;
-}
-
-.uploadProgress {
-  margin-top:.5rem;
-  background-color: #fff;
-  border: .75px solid #aaa;
-  border-radius: 3px;
-}
-
-.uploadProgress:empty {
-  background: none; margin:0; border:0;
-}
-
-.uploadProgress .wrapper {
-  position: relative;
-  background-color: #fff;
-  white-space: nowrap;
-  border-bottom: .75px solid #d2d2d2;
-  line-height: 35px;
-  padding: 0 0 0 10px;
-}
-
-.uploadProgress .wrapper:last-child {
-  border-bottom: 0;
-}
-
-.uploadProgress .wrapper:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.uploadProgress .name {
-  display: block;
-  float: left;
-  white-space: nowrap;
-  max-width: 300px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.uploadProgress .size {
-  display: block;
-  float: left;
-  white-space: nowrap;
-  color: #aaa;
-  padding-left: 5px;
-}
-
-.uploadProgress .size:before {
-  content: "(";
-}
-
-.uploadProgress .size:after {
-  content: ")";
-}
-
-.uploadProgress .progress {
-  display: block;
-  float: right;
-  width: 180px;
-  margin: 5px 10px;
-}
-
-.uploadProgress .deleteAttachment {
-  display: block;
-  float: right;
-  padding: 0;
-  background-color: transparent !important;
-  border: 0 !important;
-  background-image: none;
-  line-height:inherit;
-}
-
-.deleteAttachment:after {
-  content: '\00D7';
-  display: block;
-  line-height: inherit;
-  width: 35px;
-  text-align: center;
-  color: rgba(0, 0, 0, .3);
+body {
   font-family: sans-serif;
-  font-size: 18px;
-  font-weight: bold;
+}
+a {
+  color: #369;
+}
+.note {
+  width: 500px;
+  margin: 50px auto;
+  font-size: 1.1em;
+  color: #333;
+  text-align: justify;
+}
+#drop-area {
+  border: 2px dashed #ccc;
+  border-radius: 20px;
+  width: 480px;
+  margin: 50px auto;
+  padding: 20px;
+}
+#drop-area.highlight {
+  border-color: purple;
+}
+p {
+  margin-top: 0;
+}
+.my-form {
+  margin-bottom: 10px;
+}
+#gallery {
+  margin-top: 10px;
+}
+#gallery img {
+  width: 150px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+.button {
+  display: inline-block;
+  padding: 10px;
+  background: #ccc;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+.button:hover {
+  background: #ddd;
+}
+#fileElem {
+  display: none;
 }
 
-.uploadProgress .wrapper.success {
-  color:green;
-}
-.uploadProgress .wrapper.error {
-  color:red;
+
+
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:600);
+
+
+
+.text {
+  position: absolute;
+  width: 450px;
+  left: 50%;
+  margin-left: -225px;
+  height: 40px;
+  top: 50%;
+  margin-top: -20px;
 }
 
-.uploadProgress .error .progress { display:none; }
-.uploadProgress .success .progress { display:none; }
+p {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0;
+}
+
+.word {
+  position: absolute;
+  width: 220px;
+  opacity: 0;
+}
+
+.letter {
+  display: inline-block;
+  position: relative;
+  float: left;
+  transform: translateZ(25px);
+  transform-origin: 50% 50% 25px;
+}
+
+.letter.out {
+  transform: rotateX(90deg);
+  transition: transform 0.32s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+}
+
+.letter.behind {
+  transform: rotateX(-90deg);
+}
+
+.letter.in {
+  transform: rotateX(0deg);
+  transition: transform 0.38s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.wisteria {
+  color: #8e44ad;
+}
+
+.belize {
+  color: #2980b9;
+}
+
+.pomegranate {
+  color: #c0392b;
+}
+
+.green {
+  color: #16a085;
+}
+
+.midnight {
+  color: #2c3e50;
+}
+
 {% endblock style %}
 
 
 
 {% block body %}
-<div style="width:600px; margin:20px auto;">
-
-
-		    <div class="uploadContainer">
-
-                <div class="uploadDropzone">
-
-                    <i class="material-icons cloud">file _upload</i>
-                    <h5>Drag files here to upload</h5>
-                    <p class="text-muted">or <button type="button" class="link btnUpload"><b>browse</b></button> to choose files.</p>
-
-                </div>
-
-                <div class="alert uploadMessage" style="display:none;"></div>
-                <div id="progressContainer" class="uploadProgress"></div>
-
-
-            </div>
-
-  <br> <small>Only .pdf will accepted  <a href="#" target="_blank">Uploader</a>. <a href="#" target="_blank"></a>.
-
+<div id="drop-area">
+  <form class="my-form">
+    <p>Upload multiple files with the file dialog or by dragging and dropping file onto the dashed region</p>
+    <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
+    <label class="button" for="fileElem">Select some files</label>
+  </form>
+  <progress id="progress-bar" max=100 value=0></progress>
+  <div id="gallery" /></div>
 </div>
+<div class="note"><strong>
+  <br><br><br>
+You can also become a part of this initiative by sharing information related to this services, to build a better place to gather quality knowledge. GSAYD will forever be thankful to you
+</strong></div>
+
+
+
+
+<div class="text">
+  <p>Thankyou for being here! You are </p>
+  <p>
+    <span class="word wisteria">helpfull.</span>
+    <span class="word belize">wonderful.</span>
+    <span class="word pomegranate">kind.</span>
+    <span class="word green">beautiful.</span>
+    <span class="word midnight">Great_person.</span>
+  </p>
+</div>
+
 {% endblock body %}
 
 {% block script %}
+// ************************ Drag and drop ***************** //
+let dropArea = document.getElementById("drop-area")
 
-var uploader;
+// Prevent default drag behaviors
+;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+  dropArea.addEventListener(eventName, preventDefaults, false)
+  document.body.addEventListener(eventName, preventDefaults, false)
+})
 
-function createUploader ( i, elem ) {
+// Highlight drop area when item is dragged over it
+;['dragenter', 'dragover'].forEach(eventName => {
+  dropArea.addEventListener(eventName, highlight, false)
+})
 
-    var elem = $(elem);
-    var type = elem.data("type");
-    var dropzone = elem.find('.uploadDropzone');
-    var btn = elem.find('.btnUpload');
-    var progBox = elem.find('.uploadProgress');
-    var msgBox = elem.find('.uploadMessage');
-    var maxsize = 10000;
+;['dragleave', 'drop'].forEach(eventName => {
+  dropArea.addEventListener(eventName, unhighlight, false)
+})
 
-    function showUploadMessage ( msg, result ) {
-        msgBox.text( msg ).addClass( result ).show();
+// Handle dropped files
+dropArea.addEventListener('drop', handleDrop, false)
+
+function preventDefaults (e) {
+  e.preventDefault()
+  e.stopPropagation()
+}
+
+function highlight(e) {
+  dropArea.classList.add('highlight')
+}
+
+function unhighlight(e) {
+  dropArea.classList.remove('active')
+}
+
+function handleDrop(e) {
+  var dt = e.dataTransfer
+  var files = dt.files
+
+  handleFiles(files)
+}
+
+let uploadProgress = []
+let progressBar = document.getElementById('progress-bar')
+
+function initializeProgress(numFiles) {
+  progressBar.value = 0
+  uploadProgress = []
+
+  for(let i = numFiles; i > 0; i--) {
+    uploadProgress.push(0)
+  }
+}
+
+function updateProgress(fileNumber, percent) {
+  uploadProgress[fileNumber] = percent
+  let total = uploadProgress.reduce((tot, curr) => tot + curr, 0) / uploadProgress.length
+  console.debug('update', fileNumber, percent, total)
+  progressBar.value = total
+}
+
+function handleFiles(files) {
+  files = [...files]
+  initializeProgress(files.length)
+  files.forEach(uploadFile)
+  files.forEach(previewFile)
+}
+
+function previewFile(file) {
+  let reader = new FileReader()
+  reader.readAsDataURL(file)
+  reader.onloadend = function() {
+    let img = document.createElement('img')
+    img.src = reader.result
+    document.getElementById('gallery').appendChild(img)
+  }
+}
+
+function uploadFile(file, i) {
+  var url = 'https://api.cloudinary.com/v1_1/joezimim007/image/upload'
+  var xhr = new XMLHttpRequest()
+  var formData = new FormData()
+  xhr.open('POST', url, true)
+  xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+
+  // Update progress (can be used to show progress indicator)
+  xhr.upload.addEventListener("progress", function(e) {
+    updateProgress(i, (e.loaded * 100.0 / e.total) || 100)
+  })
+
+  xhr.addEventListener('readystatechange', function(e) {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      updateProgress(i, 100) // <- Add this
     }
-
-
-    function hideUploadMessage () {
-        msgBox.text('').removeClass('error').removeClass('unknown').removeClass('success').hide();
+    else if (xhr.readyState == 4 && xhr.status != 200) {
+      // Error. Inform the user
     }
+  })
 
-
-    //create uploader(s)
-
-    uploader = new ss.SimpleUpload({
-        button: btn,
-        dropzone: dropzone,
-        url: 'your_php_file.php',
-        name: 'uploadfile',
-        multipart: true,
-        disabledClass: 'disabled',
-        responseType: 'json',
-        allowedExtensions: ["gif", "jpg", "jpeg", "png", "pdf", "ppt"],
-        maxSize: maxsize,
-        multiple: true,
-        multipleSelect: true,
-   	    maxUploads: 10,
-	    queue: false,
-        startXHR: function() {
-
-        },
-        onSubmit: function(filename) {
-
-            hideUploadMessage();  //hide any previous errors
-
-            var progress = document.createElement('div'),
-              bar = document.createElement('div'),
-              fileSize = document.createElement('div'),
-              wrapper = document.createElement('div'),
-              close = document.createElement('button'),
-              progressBox = document.getElementById('progressContainer');
-
-
-          // Assign each element its corresponding class
-          progress.className = 'progress';
-          bar.className = 'progress-bar';
-          fileSize.className = 'size';
-          wrapper.className = 'wrapper';
-          close.className = 'deleteAttachment';
-
-
-          // Assemble the progress bar and add it to the page
-          progress.appendChild(bar);
-          wrapper.innerHTML = '<div class="name">'+filename+'</div>';
-          wrapper.appendChild(fileSize);
-          wrapper.appendChild(close);
-          wrapper.appendChild(progress);
-
-
-          $(wrapper).data('file',filename);
-
-          progressBox.appendChild(wrapper);
-
-          this.setAbortBtn ( close );
-          this.setProgressBar(bar);
-          this.setFileSizeBox(fileSize);
-          //this.setProgressContainer(wrapper); // designate the containing div to be removed after upload
-
-        },
-
-        onSizeError: function() {
-            var msg = 'Files may not exceed ' + maxsize + 'k.';
-            showUploadMessage ( msg, 'error' );
-        },
-
-        onExtError: function() {
-            var msg = 'Please select a GIF, JPG, PDF, PNG or PPT.';
-        },
-
-        onComplete: function( filename, response ) {
-
-            $('.wrapper').filterByData('file',filename).addClass('success'); //add a 'completed' class to the wrapper when file succeeds.
-
-            if ( !response ) {
-                var msg = 'Unable to upload file(s).';
-                showUploadMessage ( msg, 'error' );
-                return;
-            }
-
-            if ( response.success === true ) {
-
-                //things to do after complete, such as show image;
-
-            } else {
-
-                if ( response.msg )  {
-                    var msg = escapeTags( response.msg );
-                    showUploadMessage ( msg, 'error' );
-                } else {
-                    var msg = 'Sorry! Unable to upload one of your files.';
-                    showUploadMessage ( msg, 'error' );
-                }
-
-            }
-
-        },
-        onError: function() {
-
-            var msg = 'Unable to upload file(s) to server.  Please try again later.';
-            showUploadMessage ( msg, 'error' );
-            $('.wrapper').removeClass('success').addClass('error');
-
-        }
-
-    });
-
-
-
+  formData.append('upload_preset', 'ujpu6gyk')
+  formData.append('file', file)
+  xhr.send(formData)
 }
 
 
-$('.uploadContainer').each(createUploader);
+
+var words = document.getElementsByClassName('word');
+var wordArray = [];
+var currentWord = 0;
+
+words[currentWord].style.opacity = 1;
+for (var i = 0; i < words.length; i++) {
+  splitLetters(words[i]);
+}
+
+function changeWord() {
+  var cw = wordArray[currentWord];
+  var nw = currentWord == words.length-1 ? wordArray[0] : wordArray[currentWord+1];
+  for (var i = 0; i < cw.length; i++) {
+    animateLetterOut(cw, i);
+  }
+
+  for (var i = 0; i < nw.length; i++) {
+    nw[i].className = 'letter behind';
+    nw[0].parentElement.style.opacity = 1;
+    animateLetterIn(nw, i);
+  }
+
+  currentWord = (currentWord == wordArray.length-1) ? 0 : currentWord+1;
+}
+
+function animateLetterOut(cw, i) {
+  setTimeout(function() {
+		cw[i].className = 'letter out';
+  }, i*80);
+}
+
+function animateLetterIn(nw, i) {
+  setTimeout(function() {
+		nw[i].className = 'letter in';
+  }, 340+(i*80));
+}
+
+function splitLetters(word) {
+  var content = word.innerHTML;
+  word.innerHTML = '';
+  var letters = [];
+  for (var i = 0; i < content.length; i++) {
+    var letter = document.createElement('span');
+    letter.className = 'letter';
+    letter.innerHTML = content.charAt(i);
+    word.appendChild(letter);
+    letters.push(letter);
+  }
+
+  wordArray.push(letters);
+}
+
+changeWord();
+setInterval(changeWord, 4000);
 
 
-
-$(document).on( 'click', '.deleteAttachment', function(e) {
-
-	e.preventDefault();
-	var wrapper = $(this).closest('.wrapper');
-	wrapper.remove();
-
-
-});
 {% endblock script %}
+
