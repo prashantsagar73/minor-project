@@ -12,5 +12,5 @@ GYSAD (Genuine services at your Desk)
 ---
 ## UPDATE PR'S ARE WELCOME BUT MUST BE A QUALITY PR'S OTHERWISE WILL BE MARKED AS INVALID!
 
-### Be sure to stargaze the repository and also checkout [My Website](https://prashantsagar.tech/) to contact me.
+### Be sure to stargaze the repository and also checkout [My Website](http://prashantsagar.tech/) to contact me.
 #### Thank You.
